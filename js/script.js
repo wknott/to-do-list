@@ -1,17 +1,20 @@
 {
   const tasks = [];
+  const addTask = (newTaskInput) => {
+    tasks.push(newTaskInput.value.trim());
+    newTaskInput.value = "";
+    newTaskInput.focus();
+  };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     const newTaskInput = document.querySelector(".js-newTask");
-    const newTaskContent = newTaskInput.value.trim();
-    if (!newTaskContent) {
+    if (!newTaskInput.value.trim()) {
       newTaskInput.focus();
       return;
     }
-    tasks.push(newTaskContent);
-    newTaskInput.value = "";
-    newTaskInput.focus();
+    addTask(newTaskInput);
+    console.log(tasks);
   };
 
   const init = () => {
