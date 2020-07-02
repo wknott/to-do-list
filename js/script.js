@@ -48,7 +48,6 @@
     });
   };
   const init = () => {
-    document.querySelector(".js-newTask").focus();
     document.querySelector(".js-form").addEventListener("submit", onFormSubmit);
   };
   init();
