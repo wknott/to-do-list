@@ -1,0 +1,8 @@
+.section {
+  background-color: white;
+}
+.section__header {
+  padding: 20px;
+  margin: 0;
+  border: 1px solid #ddd;
+}

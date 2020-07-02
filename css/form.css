@@ -1,3 +1,21 @@
 .form {
+  border: 1px solid #ddd;
+  padding: 20px;
   display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-gap: 10px;
+}
+
+.form__input {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.form__button {
+  display: block;
+  padding: 10px;
+  background-color: teal;
+  color: white;
+  border: 0 solid teal;
 }
