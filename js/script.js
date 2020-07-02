@@ -1,9 +1,10 @@
 {
   const tasks = [];
   const addTask = (newTaskInput) => {
-    tasks.push(newTaskInput.value.trim());
+    tasks.push({ name: newTaskInput.value.trim() });
     newTaskInput.value = "";
     newTaskInput.focus();
+    render();
   };
 
   const onFormSubmit = (event) => {
@@ -14,9 +15,16 @@
       return;
     }
     addTask(newTaskInput);
-    console.log(tasks);
   };
 
+  const render = () => {
+    let htmlString = "";
+    for (const task of tasks) {
+      htmlString += `<li> ${task.name} </li>
+`;
+    }
+    document.querySelector(".js-tasksList").innerHTML = htmlString;
+  };
   const init = () => {
     document.querySelector(".js-newTask").focus();
     document.querySelector(".js-form").addEventListener("submit", onFormSubmit);
