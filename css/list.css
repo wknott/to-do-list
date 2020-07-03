@@ -1,0 +1,35 @@
+.list {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.list__item {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.list__button {
+  border: 0;
+  padding: 10px;
+  color: white;
+  height: 35px;
+  flex: 0 0 35px;
+}
+
+.list__button:active {
+  outline: none;
+}
+.list__button--done {
+  background-color: green;
+}
+.list__button--remove {
+  background-color: red;
+}
+
+.list__paragraph {
+  padding: 5px 10px;
+  margin: 0px;
+  flex-grow: 1;
+}

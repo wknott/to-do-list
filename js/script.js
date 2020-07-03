@@ -30,10 +30,14 @@
   const render = () => {
     let htmlString = "";
     for (const task of tasks) {
-      htmlString += `<li> 
-      <button class="js-done">${task.done ? "✔️" : "Zrobione"}</button>
-      ${task.done ? `<s>${task.name}</s>` : `${task.name}`}
-      <button class="js-remove">Usuń</button>
+      htmlString += `<li class="list__item"> 
+      <button class="list__button list__button--done js-done">${
+        task.done ? "✔" : " "
+      }</button>
+      <p class="list__paragraph">${
+        task.done ? `<s>${task.name}</s>` : `${task.name}`
+      }</p>
+      <button class="list__button list__button--remove js-remove">❌</button>
       </li>  
       `;
     }
