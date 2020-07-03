@@ -31,10 +31,10 @@
   background-color: hsl(0, 100%, 50%);
 }
 .list__button--remove:hover {
-  background-color: hsl(0, 100%, 40%);
+  background-color: hsl(0, 100%, 60%);
 }
 .list__button--remove:active {
-  background-color: hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 70%);
 }
 
 .list__paragraph {
