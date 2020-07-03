@@ -13,13 +13,11 @@
 }
 
 .form__input {
-  display: block;
   padding: 10px;
   border: 1px solid #ddd;
 }
 
 .form__button {
-  display: block;
   padding: 10px;
   background-color: hsl(180, 100%, 25%);
   color: white;

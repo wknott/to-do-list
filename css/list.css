@@ -11,7 +11,7 @@
 }
 
 .list__button {
-  border: 0;
+  border: none;
   padding: 10px;
   color: white;
   height: 35px;
