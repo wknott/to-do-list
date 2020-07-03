@@ -1,7 +1,7 @@
 .form {
   padding: 20px;
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  grid-template-columns: 1fr auto;
   grid-gap: 20px;
 }
 
@@ -21,7 +21,15 @@
 .form__button {
   display: block;
   padding: 10px;
-  background-color: teal;
+  background-color: hsl(180, 100%, 25%);
   color: white;
-  border: 0 solid teal;
+  border: none;
+}
+
+.form__button:hover {
+  background-color: hsl(180, 100%, 30%);
+}
+
+.form__button:active {
+  background-color: hsl(180, 100%, 35%);
 }
