@@ -1,6 +1,7 @@
 {
   let tasks = [];
   let displayDoneTasks = true;
+
   const addTask = (newTaskInput) => {
     tasks = [...tasks, { name: newTaskInput.value.trim() }];
     newTaskInput.value = "";
@@ -84,6 +85,13 @@
     }
   };
 
+  const render = () => {
+    renderTaskList();
+    bindRemoveEvents();
+    bindDoneEvents();
+    renderButtons();
+  };
+
   const bindButtonsEvents = () => {
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
@@ -99,19 +107,12 @@
       render();
     });
     doAllTasksButton.addEventListener("click", () => {
-      tasks = tasks.map(({ name, done }) => ({
+      tasks = tasks.map(({ name }) => ({
         name,
         done: true,
       }));
       render();
     });
-  };
-
-  const render = () => {
-    renderTaskList();
-    bindRemoveEvents();
-    bindDoneEvents();
-    renderButtons();
   };
 
   const init = () => {
