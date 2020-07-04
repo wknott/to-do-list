@@ -1,7 +1,7 @@
 {
-  const tasks = [];
+  let tasks = [];
   const addTask = (newTaskInput) => {
-    tasks.push({ name: newTaskInput.value.trim() });
+    tasks = [...tasks, { name: newTaskInput.value.trim() }];
     newTaskInput.value = "";
     newTaskInput.focus();
     render();
@@ -18,12 +18,14 @@
   };
 
   const removeTask = (index) => {
-    tasks.splice(index, 1);
+    tasks = [...tasks.slice(0, index), ...tasks.slice(index + 1)];
     render();
   };
 
   const toggleTaskDone = (taskIndex) => {
-    tasks[taskIndex].done = !tasks[taskIndex].done;
+    tasks = tasks.map(({ name, done }, index) =>
+      index === taskIndex ? { name, done: !done } : { name, done }
+    );
     render();
   };
 
@@ -43,15 +45,13 @@
 
   const render = () => {
     let htmlString = "";
-    for (const task of tasks) {
+    for (const { name, done } of tasks) {
       htmlString += `
       <li class="list__item"> 
         <button class="list__button list__button--done js-done">${
-          task.done ? "✔" : " "
+          done ? "✔" : " "
         }</button>
-        <p class="list__paragraph">${
-          task.done ? `<s>${task.name}</s>` : `${task.name}`
-        }</p>
+        <p class="list__paragraph">${done ? `<s>${name}</s>` : `${name}`}</p>
         <button class="list__button list__button--remove js-remove">❌</button>
       </li>  
       `;
