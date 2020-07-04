@@ -64,20 +64,23 @@
   };
 
   const renderButtons = () => {
+    const doneTasksDisplayButton = document.querySelector(
+      ".js-doneTasksDisplayButton"
+    );
+    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
     if (tasks.length) {
-      document
-        .querySelector(".js-doneTasksDisplayButton")
-        .classList.add("section__button--show");
-      document
-        .querySelector(".js-doAllTasksButton")
-        .classList.add("section__button--show");
+      doneTasksDisplayButton.classList.add("section__button--show");
+      doAllTasksButton.classList.add("section__button--show");
     } else {
-      document
-        .querySelector(".js-doneTasksDisplayButton")
-        .classList.remove("section__button--show");
-      document
-        .querySelector(".js-doAllTasksButton")
-        .classList.remove("section__button--show");
+      doneTasksDisplayButton.classList.remove("section__button--show");
+      doAllTasksButton.classList.remove("section__button--show");
+    }
+    if (tasks.every(({ done }) => done)) {
+      doAllTasksButton.disabled = true;
+      doAllTasksButton.classList.add("section__button--disabled");
+    } else {
+      doAllTasksButton.disabled = false;
+      doAllTasksButton.classList.remove("section__button--disabled");
     }
   };
 
@@ -85,6 +88,7 @@
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
     );
+    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
     doneTasksDisplayButton.addEventListener("click", () => {
       if (displayDoneTasks) {
         doneTasksDisplayButton.innerText = "Pokaż ukończone";
@@ -92,6 +96,13 @@
         doneTasksDisplayButton.innerText = "Ukryj ukończone";
       }
       displayDoneTasks = !displayDoneTasks;
+      render();
+    });
+    doAllTasksButton.addEventListener("click", () => {
+      tasks = tasks.map(({ name, done }) => ({
+        name,
+        done: true,
+      }));
       render();
     });
   };
