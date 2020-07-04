@@ -25,13 +25,16 @@
   border-bottom: 1px solid #ddd;
 }
 .section__button {
+  display: none;
   padding: 0 5px;
   border: none;
   background-color: white;
   color: hsl(180, 100%, 25%);
   align-items: center;
 }
-
+.section__button--show {
+  display: inline;
+}
 .section__button:hover {
   color: hsl(180, 100%, 30%);
 }
