@@ -6,7 +6,7 @@
 
 .list__item {
   padding: 5px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
   display: flex;
   align-items: center;
 }
@@ -22,18 +22,23 @@
 .list__button--done {
   background-color: hsl(120, 100%, 25%);
 }
+
 .list__button--done:hover {
   background-color: hsl(120, 100%, 30%);
 }
+
 .list__button--done:active {
   background-color: hsl(120, 100%, 35%);
 }
+
 .list__button--remove {
   background-color: hsl(0, 100%, 50%);
 }
+
 .list__button--remove:hover {
   background-color: hsl(0, 100%, 60%);
 }
+
 .list__button--remove:active {
   background-color: hsl(0, 100%, 70%);
 }
