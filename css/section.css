@@ -2,9 +2,40 @@
   background-color: white;
   margin-bottom: 10px;
 }
-.section__header {
+.section__container {
   padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-gap: 30px;
+  border-bottom: 1px solid #ddd;
+  grid-template-rows: auto;
+}
+@media (max-width: 767px) {
+  .section__container {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+}
+.section__header {
   font-size: 20px;
   margin: 0;
+}
+.section__header--bordered {
+  padding: 20px;
   border-bottom: 1px solid #ddd;
+}
+.section__button {
+  padding: 0 5px;
+  border: none;
+  background-color: white;
+  color: hsl(180, 100%, 25%);
+  align-items: center;
+}
+
+.section__button:hover {
+  color: hsl(180, 100%, 30%);
+}
+
+.section__button:active {
+  -color: hsl(180, 100%, 35%);
 }
