@@ -22,6 +22,7 @@
   background-color: hsl(180, 100%, 25%);
   color: white;
   border: none;
+  transition: 1s;
 }
 
 .form__button:hover {

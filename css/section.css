@@ -36,6 +36,7 @@
   background-color: white;
   color: hsl(180, 100%, 25%);
   align-items: center;
+  transition: 1s;
 }
 
 .section__button--show {
