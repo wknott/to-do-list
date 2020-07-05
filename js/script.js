@@ -63,35 +63,23 @@
     document.querySelector(".js-tasksList").innerHTML = htmlString;
   };
 
-  const setDisplayButtonVisability = () => {
-    const doneTasksDisplayButton = document.querySelector(
-      ".js-doneTasksDisplayButton"
-    );
-    tasks.length
-      ? doneTasksDisplayButton.classList.add("section__button--show")
-      : doneTasksDisplayButton.classList.remove("section__button--show");
-  };
-
-  const setDoAllButtonVisability = () => {
-    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
-    tasks.length
-      ? doAllTasksButton.classList.add("section__button--show")
-      : doAllTasksButton.classList.remove("section__button--show");
-    if (tasks.every(({ done }) => done)) {
-      doAllTasksButton.disabled = true;
-      doAllTasksButton.classList.add("section__button--disabled");
-    } else {
-      doAllTasksButton.disabled = false;
-      doAllTasksButton.classList.remove("section__button--disabled");
+  const renderButtons = () => {
+    let htmlString = `<h2 class="section__header">Lista zadań</h2>`;
+    if (tasks.length > 0) {
+      htmlString += `
+      <button class="section__button js-doneTasksDisplayButton">
+        ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
+      </button>
+      <button class="section__button js-doAllTasksButton ${
+        tasks.every(({ done }) => done)
+          ? `section__button--disabled" disabled`
+          : `"`
+      }>
+        Ukończ wszystkie
+      </button>
+      `;
     }
-  };
-
-  const render = () => {
-    renderTaskList();
-    bindRemoveEvents();
-    bindDoneEvents();
-    setDisplayButtonVisability();
-    setDoAllButtonVisability();
+    document.querySelector(".js-buttonsContainer").innerHTML = htmlString;
   };
 
   const bindDisplayEvent = () => {
@@ -120,10 +108,19 @@
     });
   };
 
+  const render = () => {
+    renderTaskList();
+    bindRemoveEvents();
+    bindDoneEvents();
+    renderButtons();
+    if (tasks.length) {
+      bindDisplayEvent();
+      bindDoAllEvent();
+    }
+  };
+
   const init = () => {
     document.querySelector(".js-form").addEventListener("submit", onFormSubmit);
-    bindDisplayEvent();
-    bindDoAllEvent();
   };
 
   init();
