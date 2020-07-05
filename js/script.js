@@ -48,8 +48,10 @@
   const renderTaskList = () => {
     let htmlString = "";
     for (const { name, done } of tasks) {
-        htmlString += `
-        <li class="list__item ${displayDoneTasks || !done?"":"list__item--hide"}"> 
+      htmlString += `
+        <li class="list__item ${
+          displayDoneTasks || !done ? "" : "list__item--hide"
+        }"> 
           <button class="list__button list__button--done js-done">${
             done ? "✔" : " "
           }</button>
@@ -61,18 +63,20 @@
     document.querySelector(".js-tasksList").innerHTML = htmlString;
   };
 
-  const renderButtons = () => {
+  const setDisplayButtonVisability = () => {
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
     );
+    tasks.length
+      ? doneTasksDisplayButton.classList.add("section__button--show")
+      : doneTasksDisplayButton.classList.remove("section__button--show");
+  };
+
+  const setDoAllButtonVisability = () => {
     const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
-    if (tasks.length) {
-      doneTasksDisplayButton.classList.add("section__button--show");
-      doAllTasksButton.classList.add("section__button--show");
-    } else {
-      doneTasksDisplayButton.classList.remove("section__button--show");
-      doAllTasksButton.classList.remove("section__button--show");
-    }
+    tasks.length
+      ? doAllTasksButton.classList.add("section__button--show")
+      : doAllTasksButton.classList.remove("section__button--show");
     if (tasks.every(({ done }) => done)) {
       doAllTasksButton.disabled = true;
       doAllTasksButton.classList.add("section__button--disabled");
@@ -86,14 +90,14 @@
     renderTaskList();
     bindRemoveEvents();
     bindDoneEvents();
-    renderButtons();
+    setDisplayButtonVisability();
+    setDoAllButtonVisability();
   };
 
-  const bindButtonsEvents = () => {
+  const bindDisplayEvent = () => {
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
     );
-    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
     doneTasksDisplayButton.addEventListener("click", () => {
       if (displayDoneTasks) {
         doneTasksDisplayButton.innerText = "Pokaż ukończone";
@@ -103,6 +107,10 @@
       displayDoneTasks = !displayDoneTasks;
       render();
     });
+  };
+
+  const bindDoAllEvent = () => {
+    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
     doAllTasksButton.addEventListener("click", () => {
       tasks = tasks.map(({ name }) => ({
         name,
@@ -114,7 +122,8 @@
 
   const init = () => {
     document.querySelector(".js-form").addEventListener("submit", onFormSubmit);
-    bindButtonsEvents();
+    bindDisplayEvent();
+    bindDoAllEvent();
   };
 
   init();
