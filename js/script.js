@@ -48,9 +48,8 @@
   const renderTaskList = () => {
     let htmlString = "";
     for (const { name, done } of tasks) {
-      if (displayDoneTasks || !done) {
         htmlString += `
-        <li class="list__item"> 
+        <li class="list__item ${displayDoneTasks || !done?"":"list__item--hide"}"> 
           <button class="list__button list__button--done js-done">${
             done ? "✔" : " "
           }</button>
@@ -58,9 +57,7 @@
           <button class="list__button list__button--remove js-remove">❌</button>
         </li>  
         `;
-      }
     }
-
     document.querySelector(".js-tasksList").innerHTML = htmlString;
   };
 

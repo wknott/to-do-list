@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.list__item--hide {
+  display: none;
+}
+
 .list__button {
   border: none;
   padding: 10px;
