@@ -1,7 +1,6 @@
 {
   let tasks = [];
   let displayDoneTasks = true;
-
   const addTask = (newTaskInput) => {
     tasks = [...tasks, { name: newTaskInput.value.trim() }];
     newTaskInput.value = "";
@@ -87,11 +86,6 @@
       ".js-doneTasksDisplayButton"
     );
     doneTasksDisplayButton.addEventListener("click", () => {
-      if (displayDoneTasks) {
-        doneTasksDisplayButton.innerText = "Pokaż ukończone";
-      } else {
-        doneTasksDisplayButton.innerText = "Ukryj ukończone";
-      }
       displayDoneTasks = !displayDoneTasks;
       render();
     });
