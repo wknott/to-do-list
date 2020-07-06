@@ -3,25 +3,28 @@
   let displayDoneTasks = true;
   let directionOfSort = null;
 
-  const addTask = (newTaskInput) => {
-    tasks = [...tasks, { name: newTaskInput.value.trim() }];
-    newTaskInput.value = "";
-    newTaskInput.focus();
+  const addTask = (name) => {
+    tasks = [...tasks, { name }];
     render();
   };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     const newTaskInput = document.querySelector(".js-newTask");
-    if (!newTaskInput.value.trim()) {
-      newTaskInput.focus();
+    const newTaskName = newTaskInput.value.trim();
+    newTaskInput.focus();
+    if (!newTaskName) {
       return;
     }
-    addTask(newTaskInput);
+    addTask(newTaskName);
+    newTaskInput.value = "";
   };
 
   const removeTask = (index) => {
-    tasks = [...tasks.slice(0, index), ...tasks.slice(index + 1)];
+    tasks = [
+      ...tasks.slice(0, index), 
+      ...tasks.slice(index + 1)
+    ];
     render();
   };
 
