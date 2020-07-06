@@ -70,25 +70,22 @@
   };
 
   const renderButtons = () => {
-    let htmlString = `<h2 class="section__header">Lista zadań</h2>`;
+    let htmlStringButtons = "";
     if (tasks.length > 0) {
-      htmlString += `
+      htmlStringButtons += `
       <button class="section__button js-sortButton">
         Posortuj zadania ${directionOfSort === null ? "" : directionOfSort ? "↓" : "↑"}
       </button>
       <button class="section__button js-doneTasksDisplayButton">
         ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
       </button>
-      <button class="section__button js-doAllTasksButton 
-        ${tasks.every(({ done }) => done)
-          ? `section__button--disabled" disabled`
-          : `"`
-        }>
+      <button class="section__button js-doAllTasksButton" 
+        ${!tasks.every(({ done }) => done) ? "" : "disabled"}>
         Ukończ wszystkie
       </button>
       `;
     }
-    document.querySelector(".js-buttonsContainer").innerHTML = htmlString;
+    document.querySelector(".js-buttonsContainer").innerHTML = htmlStringButtons;
   };
 
   function compare(a, b) {

@@ -6,10 +6,11 @@
 .section__container {
   padding: 20px;
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  grid-gap: 30px;
+  grid-template-columns: 1fr auto;
+  grid-gap: 20px;
   border-bottom: 1px solid #ddd;
   grid-template-rows: auto;
+  align-items: end;
 }
 
 @media (max-width: 767px) {
@@ -30,11 +31,10 @@
 }
 
 .section__button {
-  padding: 0 5px;
+  padding: 0 10px;
   border: none;
   background-color: white;
   color: hsl(180, 100%, 25%);
-  align-items: center;
   transition: 1s;
 }
 
@@ -46,7 +46,13 @@
   -color: hsl(180, 100%, 35%);
 }
 
-.section__button--disabled,
-.section__button--disabled:hover {
+.section__button:disabled {
   color: #ddd;
+}
+
+@media (max-width: 767px) {
+  .section__buttonsContainer {
+    display: grid;
+    grid-gap: 20px;
+  }
 }
