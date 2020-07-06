@@ -74,7 +74,7 @@
     if (tasks.length > 0) {
       htmlStringButtons += `
       <button class="section__button js-sortButton">
-        Posortuj zadania ${directionOfSort === null ? "" : directionOfSort ? "↓" : "↑"}
+        Posortuj zadania ${directionOfSort === null ? "" : directionOfSort === "asc" ? "↓" : "↑"}
       </button>
       <button class="section__button js-doneTasksDisplayButton">
         ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
@@ -88,22 +88,16 @@
     document.querySelector(".js-buttonsContainer").innerHTML = htmlStringButtons;
   };
 
-  function compare(a, b) {
-    if (a.name < b.name) {
-      return directionOfSort ? -1 : 1;
-    }
-    if (a.name > b.name) {
-      return directionOfSort ? 1 : -1;
-    }
-    return 0;
-  }
+  const compareTaskNames = (a, b) => directionOfSort === "asc"
+    ? a.name.localeCompare(b.name)
+    : b.name.localeCompare(a.name);
 
   const bindSortEvent = () => {
     const sortButton = document.querySelector(".js-sortButton");
     if (sortButton) {
       sortButton.addEventListener("click", () => {
-        directionOfSort = !directionOfSort;
-        tasks = [...tasks].sort(compare);
+        directionOfSort = directionOfSort === "asc" ? "desc" : "asc";
+        tasks = [...tasks].sort(compareTaskNames);
         render();
       });
     }
