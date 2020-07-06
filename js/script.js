@@ -100,32 +100,38 @@
 
   const bindSortEvent = () => {
     const sortButton = document.querySelector(".js-sortButton");
-    sortButton.addEventListener("click", () => {
-      directionOfSort = !directionOfSort;
-      tasks = [...tasks].sort(compare);
-      render();
-    });
+    if (sortButton) {
+      sortButton.addEventListener("click", () => {
+        directionOfSort = !directionOfSort;
+        tasks = [...tasks].sort(compare);
+        render();
+      });
+    }
   };
 
   const bindDisplayEvent = () => {
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
     );
-    doneTasksDisplayButton.addEventListener("click", () => {
-      displayDoneTasks = !displayDoneTasks;
-      render();
-    });
+    if (doneTasksDisplayButton) {
+      doneTasksDisplayButton.addEventListener("click", () => {
+        displayDoneTasks = !displayDoneTasks;
+        render();
+      });
+    }
   };
 
   const bindDoAllEvent = () => {
     const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
-    doAllTasksButton.addEventListener("click", () => {
-      tasks = tasks.map(({ name }) => ({
-        name,
-        done: true,
-      }));
-      render();
-    });
+    if (doAllTasksButton) {
+      doAllTasksButton.addEventListener("click", () => {
+        tasks = tasks.map(({ name }) => ({
+          name,
+          done: true,
+        }));
+        render();
+      });
+    }
   };
 
   const render = () => {
@@ -133,11 +139,9 @@
     bindRemoveEvents();
     bindDoneEvents();
     renderButtons();
-    if (tasks.length) {
-      bindDisplayEvent();
-      bindDoAllEvent();
-      bindSortEvent();
-    }
+    bindSortEvent();
+    bindDisplayEvent();
+    bindDoAllEvent();
   };
 
   const init = () => {
