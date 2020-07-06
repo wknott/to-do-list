@@ -1,6 +1,8 @@
 {
   let tasks = [];
   let displayDoneTasks = true;
+  let directionOfSort = null;
+
   const addTask = (newTaskInput) => {
     tasks = [...tasks, { name: newTaskInput.value.trim() }];
     newTaskInput.value = "";
@@ -50,7 +52,7 @@
       htmlString += `
         <li class="list__item ${
           displayDoneTasks || !done ? "" : "list__item--hide"
-        }"> 
+        }">
           <button class="list__button list__button--done js-done">${
             done ? "✔" : " "
           }</button>
@@ -66,6 +68,11 @@
     let htmlString = `<h2 class="section__header">Lista zadań</h2>`;
     if (tasks.length > 0) {
       htmlString += `
+      <button class="section__button js-sortButton">
+        Posortuj zadania ${
+          directionOfSort === null ? "" : directionOfSort ? "↓" : "↑"
+        }
+      </button>
       <button class="section__button js-doneTasksDisplayButton">
         ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
       </button>
@@ -79,6 +86,25 @@
       `;
     }
     document.querySelector(".js-buttonsContainer").innerHTML = htmlString;
+  };
+
+  function compare(a, b) {
+    if (a.name < b.name) {
+      return directionOfSort ? -1 : 1;
+    }
+    if (a.name > b.name) {
+      return directionOfSort ? 1 : -1;
+    }
+    return 0;
+  }
+
+  const bindSortEvent = () => {
+    const sortButton = document.querySelector(".js-sortButton");
+    sortButton.addEventListener("click", () => {
+      directionOfSort = !directionOfSort;
+      tasks = [...tasks].sort(compare);
+      render();
+    });
   };
 
   const bindDisplayEvent = () => {
@@ -110,6 +136,7 @@
     if (tasks.length) {
       bindDisplayEvent();
       bindDoAllEvent();
+      bindSortEvent();
     }
   };
 

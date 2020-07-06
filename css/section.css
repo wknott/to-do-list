@@ -6,7 +6,7 @@
 .section__container {
   padding: 20px;
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   grid-gap: 30px;
   border-bottom: 1px solid #ddd;
   grid-template-rows: auto;
