@@ -22,7 +22,7 @@
 
   const removeTask = (index) => {
     tasks = [
-      ...tasks.slice(0, index), 
+      ...tasks.slice(0, index),
       ...tasks.slice(index + 1)
     ];
     render();
@@ -50,21 +50,23 @@
   };
 
   const renderTaskList = () => {
-    let htmlString = "";
+    let htmlStringTasks = "";
     for (const { name, done } of tasks) {
-      htmlString += `
-        <li class="list__item ${
-          displayDoneTasks || !done ? "" : "list__item--hide"
-        }">
-          <button class="list__button list__button--done js-done">${
-            done ? "✔" : " "
-          }</button>
-          <p class="list__paragraph">${done ? `<s>${name}</s>` : `${name}`}</p>
-          <button class="list__button list__button--remove js-remove">❌</button>
+      htmlStringTasks += `
+        <li class="list__item ${displayDoneTasks || !done ? "" : "list__item--hide"}">
+          <button class="list__button list__button--done js-done">
+            ${done ? "✔" : " "}
+          </button>
+          <p class="list__paragraph">
+            ${done ? `<s>${name}</s>` : name}
+          </p>
+          <button class="list__button list__button--remove js-remove">
+            ❌
+          </button>
         </li>  
         `;
     }
-    document.querySelector(".js-tasksList").innerHTML = htmlString;
+    document.querySelector(".js-tasksList").innerHTML = htmlStringTasks;
   };
 
   const renderButtons = () => {
@@ -72,18 +74,16 @@
     if (tasks.length > 0) {
       htmlString += `
       <button class="section__button js-sortButton">
-        Posortuj zadania ${
-          directionOfSort === null ? "" : directionOfSort ? "↓" : "↑"
-        }
+        Posortuj zadania ${directionOfSort === null ? "" : directionOfSort ? "↓" : "↑"}
       </button>
       <button class="section__button js-doneTasksDisplayButton">
         ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
       </button>
-      <button class="section__button js-doAllTasksButton ${
-        tasks.every(({ done }) => done)
+      <button class="section__button js-doAllTasksButton 
+        ${tasks.every(({ done }) => done)
           ? `section__button--disabled" disabled`
           : `"`
-      }>
+        }>
         Ukończ wszystkie
       </button>
       `;
