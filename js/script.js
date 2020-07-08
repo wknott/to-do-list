@@ -23,7 +23,7 @@
   const removeTask = (index) => {
     tasks = [
       ...tasks.slice(0, index),
-      ...tasks.slice(index + 1)
+      ...tasks.slice(index + 1),
     ];
     render();
   };
@@ -50,23 +50,21 @@
   };
 
   const renderTaskList = () => {
-    let htmlStringTasks = "";
-    for (const { name, done } of tasks) {
-      htmlStringTasks += `
-        <li class="list__item ${displayDoneTasks || !done ? "" : "list__item--hide"}">
-          <button class="list__button list__button--done js-done">
-            ${done ? "✔" : " "}
-          </button>
-          <p class="list__paragraph">
-            ${done ? `<s>${name}</s>` : name}
-          </p>
-          <button class="list__button list__button--remove js-remove">
-            ❌
-          </button>
-        </li>  
-        `;
-    }
-    document.querySelector(".js-tasksList").innerHTML = htmlStringTasks;
+    const getTaskHtml = ({ name, done }) => `
+    <li class="list__item ${displayDoneTasks || !done ? "" : "list__item--hide"}">
+      <button class="list__button list__button--done js-done">
+        ${done ? "✔" : " "}
+      </button>
+      <p class="list__paragraph">
+        ${done ? `<s>${name}</s>` : name}
+      </p>
+      <button class="list__button list__button--remove js-remove">
+        ❌
+      </button>
+    </li>  
+    `;
+
+    document.querySelector(".js-tasksList").innerHTML = tasks.map(getTaskHtml).join("");
   };
 
   const renderButtons = () => {
@@ -103,28 +101,32 @@
     }
   };
 
+  const toggleDisplayDoneTasks = () => {
+    displayDoneTasks = !displayDoneTasks;
+    render();
+  }
+
   const bindDisplayEvent = () => {
     const doneTasksDisplayButton = document.querySelector(
       ".js-doneTasksDisplayButton"
     );
     if (doneTasksDisplayButton) {
-      doneTasksDisplayButton.addEventListener("click", () => {
-        displayDoneTasks = !displayDoneTasks;
-        render();
-      });
+      doneTasksDisplayButton.addEventListener("click", toggleDisplayDoneTasks);
     }
+  };
+
+  const finishAllTasks = () => {
+    tasks = tasks.map(({ name }) => ({
+      name,
+      done: true,
+    }))
+    render();
   };
 
   const bindDoAllEvent = () => {
     const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
     if (doAllTasksButton) {
-      doAllTasksButton.addEventListener("click", () => {
-        tasks = tasks.map(({ name }) => ({
-          name,
-          done: true,
-        }));
-        render();
-      });
+      doAllTasksButton.addEventListener("click", finishAllTasks);
     }
   };
 
