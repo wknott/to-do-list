@@ -1,6 +1,6 @@
 {
   let tasks = [];
-  let displayDoneTasks = true;
+  let isShowingEnabled = true;
   let directionOfSort = null;
 
   const addTask = (name) => {
@@ -51,7 +51,7 @@
 
   const renderTaskList = () => {
     const getTaskHtml = ({ name, done }) => `
-    <li class="list__item ${displayDoneTasks || !done ? "" : "list__item--hide"}">
+    <li class="list__item ${isShowingEnabled || !done ? "" : "list__item--hide"}">
       <button class="list__button list__button--done js-done">
         ${done ? "✔" : " "}
       </button>
@@ -74,10 +74,10 @@
       <button class="section__button js-sortButton">
         Posortuj zadania ${directionOfSort === null ? "" : directionOfSort === "asc" ? "↓" : "↑"}
       </button>
-      <button class="section__button js-doneTasksDisplayButton">
-        ${displayDoneTasks ? "Ukryj ukończone" : "Pokaż ukończone"}
+      <button class="section__button js-showDoneButton">
+        ${isShowingEnabled ? "Ukryj ukończone" : "Pokaż ukończone"}
       </button>
-      <button class="section__button js-doAllTasksButton" 
+      <button class="section__button js-allTasksButton" 
         ${!tasks.every(({ done }) => done) ? "" : "disabled"}>
         Ukończ wszystkie
       </button>
@@ -101,21 +101,21 @@
     }
   };
 
-  const toggleDisplayDoneTasks = () => {
-    displayDoneTasks = !displayDoneTasks;
+  const toggleIsShowingEnabled = () => {
+    isShowingEnabled = !isShowingEnabled;
     render();
   }
 
-  const bindDisplayEvent = () => {
-    const doneTasksDisplayButton = document.querySelector(
-      ".js-doneTasksDisplayButton"
+  const bindDisplayDoneEvent = () => {
+    const showDoneButton = document.querySelector(
+      ".js-showDoneButton"
     );
-    if (doneTasksDisplayButton) {
-      doneTasksDisplayButton.addEventListener("click", toggleDisplayDoneTasks);
+    if (showDoneButton) {
+      showDoneButton.addEventListener("click", toggleIsShowingEnabled);
     }
   };
 
-  const finishAllTasks = () => {
+  const markAllTasksAsDone = () => {
     tasks = tasks.map(({ name }) => ({
       name,
       done: true,
@@ -123,10 +123,10 @@
     render();
   };
 
-  const bindDoAllEvent = () => {
-    const doAllTasksButton = document.querySelector(".js-doAllTasksButton");
-    if (doAllTasksButton) {
-      doAllTasksButton.addEventListener("click", finishAllTasks);
+  const bindCompleteAllTasksEvent = () => {
+    const allTasksButton = document.querySelector(".js-allTasksButton");
+    if (allTasksButton) {
+      allTasksButton.addEventListener("click", markAllTasksAsDone);
     }
   };
 
@@ -136,8 +136,8 @@
     bindDoneEvents();
     renderButtons();
     bindSortEvent();
-    bindDisplayEvent();
-    bindDoAllEvent();
+    bindDisplayDoneEvent();
+    bindCompleteAllTasksEvent();
   };
 
   const init = () => {
