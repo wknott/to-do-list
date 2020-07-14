@@ -23,4 +23,4 @@ https://wknott.github.io/to-do-list/
 
 - HTML
 - CSS (BEM Methodology)
-- JS (ES6)
+- JS (ES6+)
